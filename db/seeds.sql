@@ -9,6 +9,13 @@ VALUES
 INSERT INTO emp_role(emp_title,emp_salary,department_name)
 -- WRITE down all the roles and link then to the department
 -- Then link them with the role_id so it will show department name, title of employee as well as salary for the different roles
+("Engineer", 60000, "R&D"),
+("Lawyer",70000,"Legal"),
+("Sales Rep", 50000, "Sales"),
+("Accountant", 70000, "Accounting"),
+("Lead Engineer",80000,"R&D"),
+("Sales Manager",70000,"Sales"),
+("Paralegal", 45000, "Legal");
 
 INSERT INTO employee(first_name,last_name,role_id,manager)
 ('Ronald', 'Firbank', 1, 11),

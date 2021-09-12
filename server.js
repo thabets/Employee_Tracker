@@ -44,7 +44,7 @@ function menu() {
       } else if (answer.init_action === "Add a department") {
         addADepartment();
       } else if (answer.init_action === "Add a role") {
-        AddARole();
+        addARole();
       } else if (answer.init_action === "Add an employee") {
         addAnEmp();
       } else if (answer.init_action === "Update an employee role") {
@@ -54,3 +54,42 @@ function menu() {
       }
     });
 }
+async function viewAllDepartments() {}
+async function viewAllRoles() {}
+async function viewAllEmp() {}
+async function addADepartment() {}
+async function addARole() {}
+async function addAnEmp() {
+  db.query("SELECT * FROM emp_role", (err, data) => {
+    const formatted = data.map((row) => {
+      return {
+        name: `${row.first_name}${row.last_name}`,
+        value: row.id,
+      };
+    });
+
+    inquirer.prompt([
+      {
+        type: "input",
+        name: "emp_fname",
+        message:
+          "What is the first name of the employee you would like to add?",
+      },
+      {
+        type: "input",
+        name: "emp_lname",
+        message: "What is the last name of the employee you would like to add?",
+      },
+      {
+        type: "list",
+        name: "emp_title",
+        message:
+          "Choose from the list provided the title the employee will receive:",
+        choices: formatted,
+      },
+    ]);
+  });
+}
+async function updEmp() {}
+
+menu();
