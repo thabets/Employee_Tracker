@@ -18,7 +18,7 @@ VALUES
 ("Sales Manager",70000,4),
 ("Paralegal", 45000, 1);
 
-INSERT INTO employee(first_name,last_name,emp_role,manager)
+INSERT INTO employee(first_name,last_name,emp_role,manager_id)
 VALUES
 ('Ronald', 'Firbank', 1, 11),
 ('Virginia', 'Woolf', 1, NULL),

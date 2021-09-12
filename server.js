@@ -1,5 +1,6 @@
 const inquirer = require("inquirer");
 const mysql = require("mysql2");
+const cTable = require("console.table");
 require("dotenv").config();
 
 const db = mysql.createConnection(
@@ -53,17 +54,79 @@ function menu() {
       }
     });
 }
-async function viewAllDepartments() {}
-async function viewAllRoles() {}
-async function viewAllEmp() {}
+async function viewAllDepartments() {
+  inquirer
+    .prompt([
+      {
+        type: "confirm",
+        name: "view_department",
+        message: "Would you like to view all departments?",
+      },
+    ])
+    .then((answers) => {
+      if (answers) {
+        db.query("SELECT * FROM department", (err, data) => {
+          console.table(data);
+          menu();
+        });
+      }
+    });
+}
+async function viewAllRoles() {
+  inquirer
+    .prompt([
+      {
+        type: "confirm",
+        name: "view_roles",
+        message: "Would you like to view all roles?",
+      },
+    ])
+    .then((answers) => {
+      if (answers) {
+        db.query("SELECT * FROM emp_role", (err, data) => {
+          console.table(data);
+          menu();
+        });
+      }
+    });
+}
+async function viewAllEmp() {
+  inquirer
+    .prompt([
+      {
+        type: "confirm",
+        name: "view_department",
+        message: "Would you like to view all Employees?",
+      },
+    ])
+    .then((answers) => {
+      if (answers) {
+        db.query("SELECT * FROM employee", (err, data) => {
+          console.table(data);
+          menu();
+        });
+      }
+    });
+}
 async function addADepartment() {
-  inquirer.prompt([
-    {
-      type: "input",
-      name: "department",
-      message: "What is the name of the department you would like to add?",
-    },
-  ]);
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "department",
+        message: "What is the name of the department you would like to add?",
+      },
+    ])
+    .then((answers) => {
+      db.query(
+        "INSERT INTO department(department_name) Values (?)",
+        [answers.department],
+        (err, data) => {
+          console.log(data);
+          menu();
+        }
+      );
+    });
 }
 async function addARole() {
   db.query("SELECT * FROM department", (err, data) => {
