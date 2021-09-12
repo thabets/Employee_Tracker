@@ -6,18 +6,20 @@ VALUES
 ("Accounting"),
 ("R&D"),
 ("Sales");
-INSERT INTO emp_role(emp_title,emp_salary,department_name)
+INSERT INTO emp_role(emp_title,emp_salary,department_id)
 -- WRITE down all the roles and link then to the department
 -- Then link them with the role_id so it will show department name, title of employee as well as salary for the different roles
-("Engineer", 60000, "R&D"),
-("Lawyer",70000,"Legal"),
-("Sales Rep", 50000, "Sales"),
-("Accountant", 70000, "Accounting"),
-("Lead Engineer",80000,"R&D"),
-("Sales Manager",70000,"Sales"),
-("Paralegal", 45000, "Legal");
+VALUES
+("Engineer", 60000, 3),
+("Lawyer",70000,1),
+("Sales Rep", 50000, 4),
+("Accountant", 70000, 2),
+("Lead Engineer",80000,3),
+("Sales Manager",70000,4),
+("Paralegal", 45000, 1);
 
-INSERT INTO employee(first_name,last_name,role_id,manager)
+INSERT INTO employee(first_name,last_name,emp_role,manager)
+VALUES
 ('Ronald', 'Firbank', 1, 11),
 ('Virginia', 'Woolf', 1, NULL),
 ('Piers', 'Gaveston', 2, NULL),
@@ -30,6 +32,7 @@ INSERT INTO employee(first_name,last_name,role_id,manager)
 ('Unica', 'Zurn', 3, 31);
 
 INSERT INTO management(id,first_name,last_name)
+VALUES
 (11,'Virginia', 'Woolf'),
 (31,'Charles', 'LeRoi'),
 (41,'Katherine', 'Mansfield');
