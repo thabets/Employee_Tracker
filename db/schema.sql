@@ -19,8 +19,8 @@ CREATE TABLE employee(
 id INT AUTO_INCREMENT NOT NULL,
 first_name VARCHAR (30) NOT NULL,
 last_name VARCHAR (30) NOT NULL,
-department_id INT NOT NULL,
-manager INT,
+emp_role INT NOT NULL,
+manager_id INT,
 PRIMARY KEY(id)
 );
 

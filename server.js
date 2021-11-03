@@ -229,6 +229,86 @@ async function addAnEmp() {
       });
   });
 }
-async function updEmp() {}
-
+async function updEmp() {
+  db.query("SELECT * FROM employee", (err, data) => {
+    const formatted = data.map((row) => {
+      return {
+        name: `${row.first_name} ${row.last_name}`,
+        value: row.id,
+      };
+    });
+    // need to put the formatted within the same choice list.
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "whichEmp",
+          message:
+            "Please choose the employee you would like to update from the list provided",
+          choices: formatted,
+        },
+        // {
+        //   type: "checkbox",
+        //   name: "updName",
+        //   message: "Would you like to update the employee name?",
+        // },
+        // {
+        //   type: "checkbox",
+        //   name: "updRole",
+        //   message: "Would you like to update the employee role?",
+        // },
+        // {
+        //   type: "checkbox",
+        //   name: "updMng",
+        //   message: "Would you like to update the employee manager?",
+        // },
+      ])
+      .then((answer) => {
+        if (answer.whichEmp.id === 1) {
+          updRole();
+        } else if (answer.whichEmp.id === 2) {
+          updRole();
+        } else if (answer.updMng) {
+          updMng();
+        } else {
+          db.end();
+        }
+      });
+  });
+}
+async function updRole() {
+  db.query("SELECT * FROM emp_role", (err, data) => {
+    const formatted = data.map((row) => {
+      return {
+        name: `${row.emp_title} ${row.emp_salary} ${department_id}`,
+        value: row.id,
+      };
+    });
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "newRole",
+          message:
+            "Please choose from the list provided the new role of the employee",
+          choices: formatted,
+        },
+      ])
+      .then((answers) => {
+        db.query(
+          "INSERT INTO employee(first_name,last_name,emp_role,manager) Values (?,?,?,?)",
+          [
+            answers.emp_fname,
+            answers.emp_lname,
+            answers.emp_title,
+            answers.manager,
+          ],
+          (err, data) => {
+            console.log(data);
+            menu();
+          }
+        );
+      });
+  });
+}
 menu();
