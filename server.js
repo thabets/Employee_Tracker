@@ -50,6 +50,7 @@ function menu() {
       } else if (answer.init_action === "Update an employee role") {
         updEmp();
       } else {
+        console.log("You have now exited, have a wonderful day!");
         db.end();
       }
     });
